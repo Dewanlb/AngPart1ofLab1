@@ -1,0 +1,23 @@
+<section>
+  <h1>Todo List</h1>
+  <p>
+    A place to store your todos
+    <input
+      id="filter"
+      class="inputs"
+      type="text"
+      placeholder="Filter to Your Todos"
+    />
+  </p>
+  <ol>
+    <li [class.strike]="todoList.completed" *ngFor="let todoList of sampleTodo">
+      <button class="btn" *ngIf="!todoList.completed">
+        Complete
+      </button>
+      {{ todoList.task }} <i id="x" class="fa fa-trash"></i>
+    </li>
+    <input class="inputs" type="text" placeholder="Add to Your To-Do's" />
+    <div></div>
+    <button class="addButton">Add</button>
+  </ol>
+</section>
