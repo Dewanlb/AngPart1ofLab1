@@ -1,23 +1,43 @@
 <section>
   <h1>Todo List</h1>
-  <p>
-    A place to store your todos
-    <input
-      id="filter"
-      class="inputs"
-      type="text"
-      placeholder="Filter to Your Todos"
-    />
-  </p>
-  <ol>
-    <li [class.strike]="todoList.completed" *ngFor="let todoList of sampleTodo">
-      <button class="btn" *ngIf="!todoList.completed">
+  <form (ngSubmit)="filterTodo()">
+    <p>
+      A place to store your todos
+      <input
+        name="filter"
+        [(ngModel)]="newFilter"
+        id="filter"
+        class="inputs"
+        type="text"
+        placeholder="Filter to Your Todos"
+      />
+    </p>
+  </form>
+  <ol id="list">
+    <li
+      [class.strike]="todoList.completed"
+      *ngFor="let todoList of filterTodo(sampleTodo, newFilter)"
+    >
+      <button
+        (click)="complete(todoList)"
+        class="btn"
+        *ngIf="!todoList.completed"
+      >
         Complete
       </button>
-      {{ todoList.task }} <i id="x" class="fa fa-trash"></i>
+      {{ todoList.task }}
+      <i (click)="delete(todoList)" id="x" class="fa fa-trash"></i>
     </li>
-    <input class="inputs" type="text" placeholder="Add to Your To-Do's" />
-    <div></div>
-    <button class="addButton">Add</button>
+    <form (ngSubmit)="addTodo()">
+      <input
+        [(ngModel)]="newTodo.task"
+        class="inputs"
+        name="input"
+        type="text"
+        placeholder="Add to Your To-Do's"
+      />
+      <p></p>
+      <button class="addButton">Add</button>
+    </form>
   </ol>
 </section>

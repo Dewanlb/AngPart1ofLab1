@@ -19,4 +19,25 @@ export class TodoComponent implements OnInit {
     { task: "Bandage hand after folding dishes", completed: false },
     { task: "Power wash the T.V", completed: true }
   ];
+  newTodo: Todo = {
+    task: "",
+    completed: false
+  };
+  addTodo() {
+    this.sampleTodo.push(this.newTodo);
+    this.newTodo = { task: "", completed: false };
+  }
+
+  newFilter: string = "";
+  filterTodo(array, string) {
+    return array.filter(o =>
+      o.task.toLowerCase().includes(string.toLowerCase())
+    );
+  }
+  complete(newTodo) {
+    newTodo.completed = true;
+  }
+  delete(newTodo) {
+    this.sampleTodo = this.sampleTodo.filter(x => x !== newTodo);
+  }
 }
